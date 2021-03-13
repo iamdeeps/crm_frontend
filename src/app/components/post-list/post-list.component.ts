@@ -17,11 +17,10 @@ export class PostListComponent implements OnInit,OnDestroy{
   }
 
   ngOnInit(){
-    
   }
 
   async fetchUsers(){
-    this.registeredUsers = await this.postsService.fetchUserData()
+    this.registeredUsers  = await this.postsService.fetchUserData()
   }
 
   ngOnDestroy(){

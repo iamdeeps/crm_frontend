@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverRoute:'http://localhost:3000/api/'
+  serverRoute:'http://localhost:3000/'
 };
 
 /*

@@ -1,11 +1,10 @@
-{{registeredUsers}}
 <mat-accordion multi=true *ngIf='registeredUsers&&registeredUsers.length>0'>
   <mat-expansion-panel *ngFor="let registeredUser of registeredUsers">
     <mat-expansion-panel-header>
       {{registeredUser.name}}
     </mat-expansion-panel-header>
     <p>{{registeredUser.email}}</p>
-    <p>{{registeredUser.dateOfBirth}}</p>
+    <p>{{registeredUser.age}}</p>
     <!-- <mat-action-row>
       <button mat-button color='primary'>EDIT</button>
       <button mat-button color='warn'>DELETE</button>

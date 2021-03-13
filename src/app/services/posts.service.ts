@@ -8,25 +8,39 @@ import { environment } from '../../environments/environment';
 })
 export class PostsService{
   constructor(private http: HttpClient){}
-  fetchUserData(){
-    this.http.get<{message:string,userData: UserProfile[]}>(environment.serverRoute+'users').subscribe((fetchedData)=>{
-      console.log('postData',fetchedData)
-      return fetchedData
+  async fetchUserData():Promise<{message:string,userData: any}>{
+    return new Promise((resolve,reject)=>{
+      try {
+        this.http.get<{message:string,userData: any}>(environment.serverRoute+'user/fetchUser').subscribe((fetchedData)=>{
+          console.log('postData',fetchedData)
+          resolve( fetchedData)
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
 
-  //TODO: Need to check User login authentication
-  checkUserLogin(userData){
-    this.http.post<{message:string,userData: UserProfile[]}>(environment.serverRoute+'login',userData).subscribe((postData)=>{
-      console.log('postData',postData)
-      return postData.userData
-    })
-  }
 
   async registerNewUserData(data){
-    await this.http.post<{message:string,userData:any}>(environment.serverRoute+'register',data).subscribe((responseData)=>{
-      console.log('responseData',responseData)
-      return responseData 
+    return new Promise((resolve,reject)=>{
+      try {
+        this.http.post<{message:string,userData:any}>(environment.serverRoute+'user/postUser',data).subscribe((responseData)=>{
+          console.log('responseData',responseData)
+          resolve (responseData) 
+        })
+      } catch (error) {
+        reject(error)
+      }
     })
   }
+
+
+  //TODO: Need to check User login authentication
+  // checkUserLogin(userData){
+  //   this.http.post<{message:string,userData: UserProfile[]}>(environment.serverRoute+'login',userData).subscribe((postData)=>{
+  //     console.log('postData',postData)
+  //     return postData.userData
+  //   })
+  // }
 }
