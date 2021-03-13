@@ -6,7 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  ngOnInIt(){
-    console.log('sadijbsakd')
+  ngOnInit(){
+    console.log('started')
   }
+  authenticationResponse(event){
+  console.log("🚀 ~ file: app.component.ts ~ line 13 ~ AppComponent ~ authenticationResponse ~ event", event)
+
+  }
+  // authenticationResponse=(response)=>{
+  //   console.log("authenticationResponse", response)
+  // }
+
+
 }
