@@ -15,12 +15,19 @@ export class PostCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmitForm(form: NgForm){
+  async onSubmitForm(form: NgForm){
     if(form.invalid){
       alert('FORM IS INVALID BRO, PHEWWW!!! THANKS TO MY VALIDATIONS')
       return ;
     }
-    this.postsService.addPosts(form.value.title,form.value.content)
+
+    //this.loading = true;
+    let body = {
+        name:form.value.name,
+        email:form.value.email,
+        age:form.value.dateOfBirth,
+    }
+    await this.postsService.registerNewUserData((body))
     form.resetForm()
   }
 

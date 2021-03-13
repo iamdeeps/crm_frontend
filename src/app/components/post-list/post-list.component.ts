@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
 import { PostsService } from "../../../app/services/posts.service";
-import { Post } from "../../models/post.model";
+import { UserProfile } from "../../models/profile.model";
 
 @Component({
   selector: 'post-list',
@@ -10,15 +10,18 @@ import { Post } from "../../models/post.model";
 })
 
 export class PostListComponent implements OnInit,OnDestroy{
-  posts:Post[] = []
+  registeredUsers:any = []
   private postSubscription:Subscription
-  constructor(public postsService:PostsService){}
+  constructor(public postsService:PostsService){
+    this.fetchUsers()
+  }
 
   ngOnInit(){
-    this.posts = this.postsService.getPosts()
-    this.postSubscription = this.postsService.getPostUpdateListener().subscribe((posts:Post[])=>{
-      this.posts = posts
-    })
+    
+  }
+
+  async fetchUsers(){
+    this.registeredUsers = await this.postsService.fetchUserData()
   }
 
   ngOnDestroy(){

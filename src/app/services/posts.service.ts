@@ -1,25 +1,32 @@
 import { Injectable } from '@angular/core'
-import { Subject } from 'rxjs'
-import { Post } from '../models/post.model'
+import { UserProfile } from '../models/profile.model'
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn:'root'
 })
 export class PostsService{
-  private posts:Post[] = []
-  private postsUpdated = new Subject<Post[]>()
-
-  getPosts(){
-    return [...this.posts]
+  constructor(private http: HttpClient){}
+  fetchUserData(){
+    this.http.get<{message:string,userData: UserProfile[]}>(environment.serverRoute+'users').subscribe((fetchedData)=>{
+      console.log('postData',fetchedData)
+      return fetchedData
+    })
   }
 
-  getPostUpdateListener(){
-    return this.postsUpdated.asObservable()
+  //TODO: Need to check User login authentication
+  checkUserLogin(userData){
+    this.http.post<{message:string,userData: UserProfile[]}>(environment.serverRoute+'login',userData).subscribe((postData)=>{
+      console.log('postData',postData)
+      return postData.userData
+    })
   }
 
-  addPosts(title:string, content:string){
-    const post:Post = {title:title, content:content}
-    this.posts.push(post)
-    this.postsUpdated.next([...this.posts])
+  async registerNewUserData(data){
+    await this.http.post<{message:string,userData:any}>(environment.serverRoute+'register',data).subscribe((responseData)=>{
+      console.log('responseData',responseData)
+      return responseData 
+    })
   }
 }

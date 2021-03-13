@@ -1,0 +1,45 @@
+  <mat-card>
+    <form (submit)="onSubmitForm(postForm)" #postForm='ngForm'>
+      <mat-form-field>
+        <input
+        matInput
+        type="text"
+        name="name"
+        ngModel
+        required
+        minlength='3'
+        placeholder="Enter the name here"
+        #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please Enter a valid name</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+        matInput
+        type="email"
+        name="email"
+        ngModel
+        required
+        minlength='3'
+        placeholder="Enter the email here"
+        #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please Enter a valid email</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <!-- Change of date of birth -->
+        <input
+        matInput
+        type='number'
+        name="dateOfBirth"
+        ngModel
+        required
+        minlength='3'
+        placeholder="Enter the age here"
+        #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please Enter a valid age</mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color='primary'
+        type="submit">SUBMIT</button>
+    </form>
+  </mat-card>
