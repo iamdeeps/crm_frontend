@@ -1,14 +1,14 @@
-<mat-accordion multi=true *ngIf='registeredUsers&&registeredUsers.length>0'>
-  <mat-expansion-panel *ngFor="let registeredUser of registeredUsers">
+<mat-accordion multi=true *ngIf='users&&users.length>0'>
+  <mat-expansion-panel *ngFor="let registeredUser of users">
     <mat-expansion-panel-header>
-      {{registeredUser.name}}
+      Name: {{registeredUser.name}}
     </mat-expansion-panel-header>
-    <p>{{registeredUser.email}}</p>
-    <p>{{registeredUser.age}}</p>
+    <p>Email: {{registeredUser.email}}</p>
+    <p>DOB: {{registeredUser.dateOfBirth}}</p>
     <!-- <mat-action-row>
       <button mat-button color='primary'>EDIT</button>
       <button mat-button color='warn'>DELETE</button>
     </mat-action-row> -->
   </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf='registeredUsers&&registeredUsers.length<=0'>No registered Users added yet</p>
+<p class="info-text mat-body-1" *ngIf='users&&users.length<=0'>No registered Users added yet</p>

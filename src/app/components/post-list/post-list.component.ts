@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { PostsService } from "../../../app/services/posts.service";
-import { UserProfile } from "../../models/profile.model";
+import { RegisteringUser } from "src/app/models/profile.model";
 
 @Component({
   selector: 'post-list',
@@ -9,21 +8,12 @@ import { UserProfile } from "../../models/profile.model";
   styleUrls:['./post-list.component.css']
 })
 
-export class PostListComponent implements OnInit,OnDestroy{
-  registeredUsers:any = []
-  private postSubscription:Subscription
-  constructor(public postsService:PostsService){
-    this.fetchUsers()
+export class PostListComponent implements OnInit{
+  @Input() users:RegisteringUser[] = []
+  constructor(){
   }
 
   ngOnInit(){
   }
 
-  async fetchUsers(){
-    this.registeredUsers  = await this.postsService.fetchUserData()
-  }
-
-  ngOnDestroy(){
-    this.postSubscription.unsubscribe()
-  }
 }

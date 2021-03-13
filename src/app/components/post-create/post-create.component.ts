@@ -8,11 +8,17 @@ import { PostsService } from '../../services/posts.service'
   styleUrls: ['./post-create.component.css']
 })
 export class PostCreateComponent implements OnInit {
-
+  registeredUsers:any = []
+  maxDate= new Date(new Date())
   constructor(public postsService:PostsService) {
+    this.fetchUsers()
   }
 
   ngOnInit(): void {
+  }
+  date
+  dateChanged($event){
+    this.date = +new Date($event.value)
   }
 
   async onSubmitForm(form: NgForm){
@@ -20,15 +26,19 @@ export class PostCreateComponent implements OnInit {
       alert('FORM IS INVALID BRO, PHEWWW!!! THANKS TO MY VALIDATIONS')
       return ;
     }
-
-    //this.loading = true;
     let body = {
-        name:form.value.name,
-        email:form.value.email,
-        age:form.value.dateOfBirth,
+      name:form.value.name,
+      email:form.value.email,
+      dateOfBirth:this.date,
     }
-    await this.postsService.registerNewUserData((body))
-    form.resetForm()
+    console.log('body',body)
+    await this.postsService.registerNewUserData(body)
+    this.registeredUsers.push(body)
+    //form.resetForm()
+  }
+
+  async fetchUsers(){
+    this.registeredUsers  = await this.postsService.fetchUserData()
   }
 
 }

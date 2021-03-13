@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { UserProfile } from '../models/profile.model'
+import { UserProfile, RegisteringUser } from '../models/profile.model'
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -22,7 +22,7 @@ export class PostsService{
   }
 
 
-  async registerNewUserData(data){
+  async registerNewUserData(data:RegisteringUser){
     return new Promise((resolve,reject)=>{
       try {
         this.http.post<{message:string,userData:any}>(environment.serverRoute+'user/postUser',data).subscribe((responseData)=>{

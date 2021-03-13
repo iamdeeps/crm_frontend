@@ -12,4 +12,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logOut(){
+    console.log("WORKING ON THIS")
+  }
+
 }
