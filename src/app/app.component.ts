@@ -1,21 +1,47 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { PostsService } from './services/posts.service';
+
+declare var google: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
+  showDashboard = false
+  constructor(
+    public postService:PostsService,
+    private cd:ChangeDetectorRef)
+    {}
+
   ngOnInit(){
-    console.log('started')
+    google.accounts.id.initialize({
+      client_id: '995726106321-95i2teatfjodc60rd9gsc5lj26o49dr1.apps.googleusercontent.com',
+      callback: this.authenticationResponse,
+    });
+    google.accounts.id.prompt(notification=>{
+      if(notification.isDismissedMoment()){
+        console.log('getDismissedReason',notification.getDismissedReason())
+      }else if(notification.isNotDisplayed()){
+        console.log('getDismissedReason',notification.getNotDisplayedReason())
+      }
+    })
   }
-  authenticationResponse(event){
-  console.log("🚀 ~ file: app.component.ts ~ line 13 ~ AppComponent ~ authenticationResponse ~ event", event)
 
+  authenticationResponse= async (response)=>{
+    console.log("authenticationResponse", response)
+    this.postService.googleLogin(response).subscribe((data)=>{
+      console.log('data',data)
+      this.postService.setUserData(data.userData)
+      this.showDashboard = !this.showDashboard
+      this.cd.detectChanges()
+    })
   }
-  // authenticationResponse=(response)=>{
-  //   console.log("authenticationResponse", response)
-  // }
 
-
+  signOut(){
+    google.accounts.id.disableAutoSelect();
+    console.log('signout')
+  }
 }

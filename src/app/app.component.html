@@ -7,17 +7,23 @@
 
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>Google Auth Demo</title>
-</head>
-<body>
-  <h1>Welcome to the Demo</h1>
-  <div id="g_id_onload"
-     data-client_id="1024036868426-c005snlm018arb6jkupan03dql650jqs.apps.googleusercontent.com"
-     data-cancel_on_tap_outside="false"
-     data-login_uri="http://localhost:3000/user/googleLogin"
-     >
-</div>
-</body>
+  <head>
+    <title>Google Auth Demo</title>
+  </head>
+  <body>
+    <div *ngIf='!showDashboard'>
+      <h1>Welcome to the CRM Project</h1>
+      <h5>Please Authenticate the project with google signin to continue</h5>
+    </div>
+    <!-- <div id="g_id_onload"
+      data-client_id="995726106321-95i2teatfjodc60rd9gsc5lj26o49dr1.apps.googleusercontent.com"
+      data-cancel_on_tap_outside="false"
+      data-login_uri="http://localhost:4200/dashboard"
+    >
+    </div> -->
+    <div *ngIf='showDashboard'>
+      <header></header>
+      <post-create></post-create>
+    </div>
+  </body>
 </html>

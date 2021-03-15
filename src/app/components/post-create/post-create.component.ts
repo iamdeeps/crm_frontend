@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { PostsService } from '../../services/posts.service'
 
@@ -7,10 +7,15 @@ import { PostsService } from '../../services/posts.service'
   templateUrl: './post-create.component.html',
   styleUrls: ['./post-create.component.css']
 })
+
 export class PostCreateComponent implements OnInit {
+
   registeredUsers:any = []
   maxDate= new Date(new Date())
-  constructor(public postsService:PostsService) {
+
+  constructor(
+    public postsService:PostsService,
+    private cd:ChangeDetectorRef) {
     this.fetchUsers()
   }
 
@@ -32,13 +37,19 @@ export class PostCreateComponent implements OnInit {
       dateOfBirth:this.date,
     }
     console.log('body',body)
-    await this.postsService.registerNewUserData(body)
+    this.postsService.registerNewUserData(body).subscribe((fetchedData)=>{
+      console.log('postData',fetchedData)
+    })
     this.registeredUsers.push(body)
-    //form.resetForm()
+    form.resetForm()
   }
 
   async fetchUsers(){
-    this.registeredUsers  = await this.postsService.fetchUserData()
+    this.postsService.fetchUserData().subscribe((fetchedData)=>{
+      console.log(fetchedData)
+      this.registeredUsers = fetchedData
+      this.cd.detectChanges()
+    })
   }
 
 }

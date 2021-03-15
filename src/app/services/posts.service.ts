@@ -7,40 +7,27 @@ import { environment } from '../../environments/environment';
   providedIn:'root'
 })
 export class PostsService{
-  constructor(private http: HttpClient){}
-  async fetchUserData():Promise<{message:string,userData: any}>{
-    return new Promise((resolve,reject)=>{
-      try {
-        this.http.get<{message:string,userData: any}>(environment.serverRoute+'user/fetchUser').subscribe((fetchedData)=>{
-          console.log('postData',fetchedData)
-          resolve( fetchedData)
-        })
-      } catch (error) {
-        reject(error)
-      }
-    })
+  userData = {}
+  constructor(private http: HttpClient){
   }
 
-
-  async registerNewUserData(data:RegisteringUser){
-    return new Promise((resolve,reject)=>{
-      try {
-        this.http.post<{message:string,userData:any}>(environment.serverRoute+'user/postUser',data).subscribe((responseData)=>{
-          console.log('responseData',responseData)
-          resolve (responseData) 
-        })
-      } catch (error) {
-        reject(error)
-      }
-    })
+  fetchUserData(){
+    return this.http.get<{message:string,userData:any}>(environment.serverRoute+'user/fetchUser')
   }
 
+  registerNewUserData(data:any){
+    return this.http.post<{message:string,userData:any}>(environment.serverRoute+'user/postUser',data)
+  }
+  
+  googleLogin(userData){
+    return this.http.post<{message:string,userData:any}>(environment.serverRoute+'user/googleLogin',userData)
+  }
 
-  //TODO: Need to check User login authentication
-  // checkUserLogin(userData){
-  //   this.http.post<{message:string,userData: UserProfile[]}>(environment.serverRoute+'login',userData).subscribe((postData)=>{
-  //     console.log('postData',postData)
-  //     return postData.userData
-  //   })
-  // }
+  setUserData(data){
+    this.userData = data
+  } 
+  
+  getUserData(){
+    return this.userData
+  }
 }
