@@ -16,13 +16,14 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HeaderComponent } from '../app/components/header/header.component'
 import { HttpClientModule } from '@angular/common/http';
-
+import { FilterPipe } from "./pipes/filter.pipe";
 @NgModule({
   declarations: [
     AppComponent,
     PostCreateComponent,
     HeaderComponent,
     PostListComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,

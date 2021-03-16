@@ -1,14 +1,19 @@
-<mat-accordion multi=true *ngIf='users&&users.length>0'>
-  <mat-expansion-panel *ngFor="let registeredUser of users">
-    <mat-expansion-panel-header>
-      Name: {{registeredUser.name}}
-    </mat-expansion-panel-header>
-    <p>Email: {{registeredUser.email}}</p>
-    <p>DOB: {{registeredUser.dateOfBirth}}</p>
-    <!-- <mat-action-row>
-      <button mat-button color='primary'>EDIT</button>
-      <button mat-button color='warn'>DELETE</button>
-    </mat-action-row> -->
-  </mat-expansion-panel>
-</mat-accordion>
+<div class="flex-parent jc-center">
+  <input type="text" placeholder="Search a Friend using name or email" [(ngModel)] = "searchText">
+</div><br>
+<table>
+  <thead>
+    <th>Friends Name</th>
+    <th>Friends Email</th>
+    <th>Friends DOB</th>
+  </thead>
+  <tbody>
+      <tr *ngFor="let registeredUser of users  | filter: searchText">
+        <td>{{registeredUser.name}}</td>
+        <td>{{registeredUser.email}}</td>
+        <td>{{registeredUser.dateOfBirth | date: 'dd/MM/yy'}}</td>
+      </tr>
+  </tbody>
+</table>
+
 <p class="info-text mat-body-1" *ngIf='users&&users.length<=0'>No registered Users added yet</p>

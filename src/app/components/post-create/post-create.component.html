@@ -8,7 +8,7 @@
         ngModel
         required
         minlength='3'
-        placeholder="Enter the name here"
+        placeholder="Enter Your Friends Name"
         #title="ngModel">
         <mat-error *ngIf="title.invalid">Please Enter a valid name</mat-error>
       </mat-form-field>
@@ -19,23 +19,34 @@
         name="email"
         ngModel
         required
+        pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
         minlength='3'
-        placeholder="Enter the email here"
+        placeholder="Enter Your Friends Email"
         #title="ngModel">
-        <mat-error *ngIf="title.invalid">Please Enter a valid email</mat-error>
+        <mat-error *ngIf="title.invalid ">Please Enter a valid email</mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>Choose a date</mat-label>
-        <input matInput [matDatepicker]="picker" (dateChange)='dateChanged($event)' [max]="maxDate" disabled >
+        <mat-label>Enter Your Friends Birthday (dd/mm/yyyy format)</mat-label>
+        <input #DateSelectorInput matInput [matDatepicker]="picker" (dateChange)='dateChanged($event)' [max]="maxDate" disabled>
         <mat-datepicker-toggle matSuffix [for]="picker" disabled=false></mat-datepicker-toggle>
         <mat-datepicker #picker disabled=false touchUi=true></mat-datepicker>
       </mat-form-field>
-      <button
+      <div class="flex-parent jc-center">
+        <button
+          mat-raised-button
+          color='primary'
+          type="submit" >SUBMIT
+        </button>
+      </div><br>
+      </form>
+      <div class="flex-parent jc-center">
+        <input type="file"
+      [accept]="type||false" (change)="onFileChange($event)"> 
+        <button
         mat-raised-button
         color='primary'
-        type="submit">SUBMIT</button>
-    </form>
-  </mat-card>
-
+        (click)='bulkUploadCsv()'>Upload Csv</button>
+      </div>
+    </mat-card>
 
   <post-list [users]="registeredUsers"></post-list>

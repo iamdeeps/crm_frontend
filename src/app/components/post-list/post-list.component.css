@@ -3,6 +3,37 @@
   margin-top: 1rem;
 }
 
+input{
+  width: 60%;
+  padding: 1%;
+}
+
 .info-text{
   text-align: center;
+}
+
+th, td { 
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table{
+  border: 1px solid black;
+  border-collapse: collapse;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.flex-parent {
+  display: flex;
+}
+
+.jc-center {
+  justify-content: center;
+}
+
+button.margin-right {
+  margin-right: 20%;
 }

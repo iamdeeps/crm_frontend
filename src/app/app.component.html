@@ -1,10 +1,3 @@
-<!-- <header></header>
-<br>
-<main>
-  <post-create></post-create>
-</main> -->
-
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,15 +5,13 @@
   </head>
   <body>
     <div *ngIf='!showDashboard'>
-      <h1>Welcome to the CRM Project</h1>
-      <h5>Please Authenticate the project with google signin to continue</h5>
+      <div class="flex-parent jc-center">
+        <h1><b>Welcome to the CRM Project</b></h1>
+      </div>
+      <div class="flex-parent jc-center">
+        <h4>Please Authenticate the project with google signin to continue</h4>
+      </div>
     </div>
-    <!-- <div id="g_id_onload"
-      data-client_id="995726106321-95i2teatfjodc60rd9gsc5lj26o49dr1.apps.googleusercontent.com"
-      data-cancel_on_tap_outside="false"
-      data-login_uri="http://localhost:4200/dashboard"
-    >
-    </div> -->
     <div *ngIf='showDashboard'>
       <header></header>
       <post-create></post-create>

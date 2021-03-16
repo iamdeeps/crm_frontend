@@ -10,6 +10,7 @@ import { RegisteringUser } from "src/app/models/profile.model";
 
 export class PostListComponent implements OnInit{
   @Input() users:RegisteringUser[] = []
+  searchText = ''
   constructor(){
   }
 

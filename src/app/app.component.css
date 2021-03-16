@@ -2,3 +2,16 @@ main {
   width: 80%;
   margin: 1rem auto;
 }
+
+
+.flex-parent {
+  display: flex;
+  justify-content: center;
+}
+
+.jc-center {
+  margin-top: 10%;
+  margin-right: 40px;
+  margin-left: 40px;
+  text-align: center;
+}

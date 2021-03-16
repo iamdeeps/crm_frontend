@@ -30,4 +30,8 @@ export class PostsService{
   getUserData(){
     return this.userData
   }
+
+  bulkUploadUserData(userData){
+    return this.http.post<{message:string,userData:any}>(environment.serverRoute+'user/bulkUploadData',userData)
+  }
 }

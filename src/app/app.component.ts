@@ -31,15 +31,13 @@ export class AppComponent {
   }
 
   authenticationResponse= async (response)=>{
-    console.log("authenticationResponse", response)
     this.postService.googleLogin(response).subscribe((data)=>{
-      console.log('data',data)
       this.postService.setUserData(data.userData)
       this.showDashboard = !this.showDashboard
       this.cd.detectChanges()
     })
   }
-
+  
   signOut(){
     google.accounts.id.disableAutoSelect();
     console.log('signout')
