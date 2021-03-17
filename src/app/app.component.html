@@ -4,7 +4,7 @@
     <title>Google Auth Demo</title>
   </head>
   <body>
-    <div *ngIf='!showDashboard'>
+    <div *ngIf='showDashboard'>
       <div class="flex-parent jc-center">
         <h1><b>Welcome to the CRM Project</b></h1>
       </div>
@@ -12,7 +12,7 @@
         <h4>Please Authenticate the project with google signin to continue</h4>
       </div>
     </div>
-    <div *ngIf='showDashboard'>
+    <div [ngClass]="{'hidden': showDashboard}">
       <header></header>
       <post-create></post-create>
     </div>

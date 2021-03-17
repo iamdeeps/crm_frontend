@@ -10,7 +10,7 @@ declare var google: any;
 })
 
 export class AppComponent {
-  showDashboard = false
+  showDashboard = true
   constructor(
     public postService:PostsService,
     private cd:ChangeDetectorRef)
