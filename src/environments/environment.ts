@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serverRoute:'http://localhost:3000/'
+  serverRoute:'http://ec2-18-222-168-51.us-east-2.compute.amazonaws.com:3000/',//'http://localhost:3000/'
 };
 
 /*
